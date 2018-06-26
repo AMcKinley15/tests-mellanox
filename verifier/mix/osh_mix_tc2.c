@@ -108,24 +108,26 @@ static int test_item1(void)
 
                 if (type == 1)  /* OSHMEM part */
                 {
-                    shmem_barrier_all();
-
+                	shmem_barrier_all();
                     if (myid == 0) {
                         for (i = 0; i < loop + skip; i++) {
                             if (i == skip)
+                            {
                                 t_start = MPI_Wtime();
+                            }
                             shmem_putmem(sh_buf, s_buf, size, 1);
                             shmem_short_wait((short*)(sh_buf + size - 1), 0);
                             shmem_getmem(r_buf, sh_buf, size, 1);
                         }
                         t_end = MPI_Wtime();
+                       
 
 
                     } else if (myid == 1) {
                         for (i = 0; i < loop + skip; i++) {
                             shmem_short_wait((short*)(sh_buf + size - 1), 0);
-                            shmem_getmem(r_buf, sh_buf, size, 0);
-                            shmem_putmem(sh_buf, s_buf, size, 0);
+                            shmem_getmem(r_buf, sh_buf, size, 0)
+;                            shmem_putmem(sh_buf, s_buf, size, 0);
                         }
                     }
                 }

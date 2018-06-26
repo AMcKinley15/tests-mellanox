@@ -13,7 +13,7 @@
 
 #include "osh_tests.h"
 #include "osh_mix.h"
-
+#include "mpi.h"
 
 const TE_NODE mix_tcs[] =
 {
@@ -35,6 +35,8 @@ static const AOPT_DESC  self_opt_desc[] =
 
 int proc_tst_mix( const TE_NODE *node, int argc, const char **argv )
 {
+	char **mpiArgv = argv;
+	//MPI_Init(&argc, &mpiArgv);
     OSH_ERROR status = OSH_ERR_NONE;
 	const AOPT_OBJECT* self_opt_obj = NULL;
 
@@ -79,9 +81,9 @@ int proc_tst_mix( const TE_NODE *node, int argc, const char **argv )
 		    log_help("\n");
 	    }
 	}
-
 	/* Destroy option objects */
 	aopt_exit((AOPT_OBJECT*)self_opt_obj);
+	//MPI_Finalize();
 
     return status;
 }

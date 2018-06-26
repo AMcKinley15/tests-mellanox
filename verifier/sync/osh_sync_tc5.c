@@ -19,6 +19,14 @@ static int test_item1(void);
 static int test_item2(void);
 static int test_item3(void);
 
+#ifdef QUICK_TEST
+#define WRITE_ATTEMPTS 1000
+#define ITERATIONS 1
+#else
+#define WRITE_ATTEMPTS 100000
+#define ITERATIONS 10
+#endif
+
 /****************************************************************************
  * Test Case processing procedure
  ***************************************************************************/
@@ -45,7 +53,7 @@ int osh_sync_tc5(const TE_NODE *node, int argc, const char *argv[])
     {
         rc = ri;
     }
-
+    
     ri = test_item3();
     log_item(node, 3, ri);
     shmem_barrier_all();
@@ -62,8 +70,8 @@ static int test_item1(void)
     int me = _my_pe();
     int num_pe = _num_pes();
     int rc = TC_PASS;
-    const int number_of_iterations = 10;
-    const int number_of_write_attempts = 1000;
+    const int number_of_iterations = ITERATIONS;
+    const int number_of_write_attempts = WRITE_ATTEMPTS;
     int i, j;
     int zero = 0;
 
@@ -73,6 +81,7 @@ static int test_item1(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
+            //printf("PE: %i, i: %i, j: %i\n", me, i, j);
             int test_value = i * j;
             shmem_int_put(test_array + me, &(test_value), 1, 0);
             shmem_quiet();
@@ -88,9 +97,7 @@ static int test_item1(void)
             shmem_quiet();
         }
     }
-
-    shfree(test_array);
-
+    shmem_free(test_array);
     return rc;
 }
 
@@ -99,8 +106,8 @@ static int test_item2(void)
     int me = _my_pe();
     int num_pe = _num_pes();
     int rc = TC_PASS;
-    const int number_of_iterations = 10;
-    const int number_of_write_attempts = 1000;
+    const int number_of_iterations = ITERATIONS;
+    const int number_of_write_attempts = WRITE_ATTEMPTS;
     int i, j;
     char zero = 0;
 
@@ -110,6 +117,7 @@ static int test_item2(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
+            //printf("PE: %i, i: %i, j: %i\n",me, i, j);
             char test_value = (char)(i*j);
             shmem_char_put(test_array + me, &(test_value), 1, 0);
             shmem_quiet();
@@ -128,7 +136,7 @@ static int test_item2(void)
         }
     }
 
-    shfree(test_array);
+    shmem_free(test_array);
 
     return rc;
 }
@@ -138,8 +146,8 @@ static int test_item3(void)
     long me = _my_pe();
     int num_pe = _num_pes();
     int rc = TC_PASS;
-    const int number_of_iterations = 10;
-    const int number_of_write_attempts = 10000;
+    const int number_of_iterations = ITERATIONS;
+    const int number_of_write_attempts = WRITE_ATTEMPTS;
     int i, j;
     char zero = 0;
     static long test_variable = 0;
@@ -153,6 +161,7 @@ static int test_item3(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
+            //printf("PE:, %i, i: %i, j: %i\n",me, i, j);
             char test_value = (char)(i*j);
             shmem_char_put(test_array + me, &test_value, 1, 1);
             shmem_quiet();
@@ -173,7 +182,7 @@ static int test_item3(void)
         shmem_long_put(&test_variable, &me, 1, 1);
     }
 
-    shfree(test_array);
+    shmem_free(test_array);
 
     return rc;
 }

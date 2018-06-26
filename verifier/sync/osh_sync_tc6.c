@@ -21,7 +21,11 @@
  ***************************************************************************/
 static int test_item1(void);
 
+#ifdef QUICK_TEST
+#define NUMBER_OF_ITERATIONS 1000
+#else
 #define NUMBER_OF_ITERATIONS 100000
+#endif
 
 /****************************************************************************
  * Test Case processing procedure

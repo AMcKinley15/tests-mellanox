@@ -35,7 +35,11 @@ static double __scale_value( double, const char ** );
 
 #define REPORT_USEC_IN_SEC  ((double)1.0e6)
 #define REPORT_WAIT         3
+#ifdef QUICK_TEST
+#define REPORT_DURATION     100
+#else
 #define REPORT_DURATION     1000
+#endif
 #define REPORT_MSIZE        8096
 #define REPORT_TSIZE        0
 

@@ -204,7 +204,6 @@ static int __do_exec( const TE_NODE* node, const AOPT_OBJECT* opt_obj, int argc,
          */
         start_time = time( NULL );
         srand( (unsigned int)start_time );
-
         while (!status)
         {
             int all_tests = 1;
@@ -236,7 +235,6 @@ static int __do_exec( const TE_NODE* node, const AOPT_OBJECT* opt_obj, int argc,
                             *tcs_name = '\0';
                             tcs_name++;
                         }
-
                         tst_node = find_node(node->child, tst_name);
                         if (tst_node)
                         {
@@ -253,7 +251,6 @@ static int __do_exec( const TE_NODE* node, const AOPT_OBJECT* opt_obj, int argc,
                     }
                 }
             }
-
             cur_tst_node = (tst_node ? tst_node : node->child);
             while (cur_tst_node && cur_tst_node->name)
             {

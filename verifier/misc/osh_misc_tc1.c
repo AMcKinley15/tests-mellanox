@@ -20,8 +20,11 @@
  * it is recommended to form every item as function
  ***************************************************************************/
 static int test_item1(void);
-
+#ifdef QUICK_TEST
+#define ARRAY_SIZE 1000
+#else
 #define ARRAY_SIZE 10000
+#endif
 #define TRY_SIZE 100
 
 /****************************************************************************
