@@ -81,7 +81,6 @@ static int test_item1(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
-            //printf("PE: %i, i: %i, j: %i\n", me, i, j);
             int test_value = i * j;
             shmem_int_put(test_array + me, &(test_value), 1, 0);
             shmem_quiet();
@@ -117,7 +116,6 @@ static int test_item2(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
-            //printf("PE: %i, i: %i, j: %i\n",me, i, j);
             char test_value = (char)(i*j);
             shmem_char_put(test_array + me, &(test_value), 1, 0);
             shmem_quiet();
@@ -161,7 +159,6 @@ static int test_item3(void)
     {
         for (j = 0; j < number_of_write_attempts; j++)
         {
-            //printf("PE:, %i, i: %i, j: %i\n",me, i, j);
             char test_value = (char)(i*j);
             shmem_char_put(test_array + me, &test_value, 1, 1);
             shmem_quiet();

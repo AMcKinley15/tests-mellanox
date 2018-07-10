@@ -36,7 +36,6 @@ static const AOPT_DESC  self_opt_desc[] =
 
 int proc_tst_nbi( const TE_NODE *node, int argc, const char **argv )
 {
-    printf("(hello world)\n");
     OSH_ERROR status = OSH_ERR_NONE;
     const AOPT_OBJECT* self_opt_obj = NULL;
 

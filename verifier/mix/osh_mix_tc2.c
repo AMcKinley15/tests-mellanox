@@ -126,8 +126,8 @@ static int test_item1(void)
                     } else if (myid == 1) {
                         for (i = 0; i < loop + skip; i++) {
                             shmem_short_wait((short*)(sh_buf + size - 1), 0);
-                            shmem_getmem(r_buf, sh_buf, size, 0)
-;                            shmem_putmem(sh_buf, s_buf, size, 0);
+                            shmem_getmem(r_buf, sh_buf, size, 0);
+                            shmem_putmem(sh_buf, s_buf, size, 0);
                         }
                     }
                 }
