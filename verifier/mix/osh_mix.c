@@ -84,6 +84,7 @@ int proc_tst_mix( const TE_NODE *node, int argc, const char **argv )
 		    log_help("\n");
 	    }
 	}
+	
 	/* Destroy option objects */
 	aopt_exit((AOPT_OBJECT*)self_opt_obj);
 

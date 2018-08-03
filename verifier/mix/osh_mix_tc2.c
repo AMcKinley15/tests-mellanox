@@ -111,8 +111,7 @@ static int test_item1(void)
                 	shmem_barrier_all();
                     if (myid == 0) {
                         for (i = 0; i < loop + skip; i++) {
-                            if (i == skip)
-                            {
+                            if (i == skip){
                                 t_start = MPI_Wtime();
                             }
                             shmem_putmem(sh_buf, s_buf, size, 1);
@@ -161,13 +160,11 @@ static int test_item1(void)
             }
         }
     }
-    else
-    {
+    else{
         rc = TC_SETUP_FAIL;
     }
 
-    if (sh_buf)
-    {
+    if (sh_buf){
         shfree(sh_buf);
     }
 
